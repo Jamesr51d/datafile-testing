@@ -20,9 +20,9 @@ namespace DeviceDetection
         public static void Main()
         {
             // DATAFILES
-            string Datafile1 = @"\\dpnas1\Production\daphne\hash\v4\2023\09\12\Enterprise-HashV41.hash";
-            string Datafile2 = @"\\xnas1\Test\james\pearl.daphne\pre-prod\daphne\hash\v4\2023\09\13\Enterprise-HashV41.hash";
-           // string Datafile2 = @"\\XNAS1\Test\james\pearl.daphne\20230904b\daphne\hash\v4\2023\09\03\Enterprise-HashV41.hash";
+            string Datafile1 = @"\\dpnas1\Production\daphne\hash\v4\2023\09\14\Enterprise-HashV41.hash";
+            string Datafile2 = @"\\xnas1\Test\james\pearl.daphne\pre-prod\daphne\hash\v4\2023\09\14\Enterprise-HashV41.hash";
+            // string Datafile2 = @"\\XNAS1\Test\james\pearl.daphne\20230904b\daphne\hash\v4\2023\09\03\Enterprise-HashV41.hash";
             // string Datafile = @"\\dpnas1\Production\daphne\hash\v4\2023\09\04\Enterprise-HashV41.hash";
 
             string filenameNew = "Top1500Crawlers";
@@ -63,9 +63,15 @@ namespace DeviceDetection
                     int col = 1; // Start from the first column
 
                     // Headers
-                    worksheet.Cells[row, col].Value = "Property";
-                    worksheet.Cells[row, col + 1].Value = "Datafile1 Value";
-                    worksheet.Cells[row, col + 2].Value = "Datafile2 Value";
+                    worksheet.Cells[row, col].Value = "Property Name";
+                    worksheet.Cells[row, col + 1].Value = "Live Datafile Value";
+                    worksheet.Cells[row, col + 2].Value = "Pre-Prod Datafile Value";
+                    worksheet.Cells[row, col + 3].Value = "Are Returned Values the Same?";
+
+                    worksheet.Column(2).Width = 30.57;
+                    worksheet.Column(2).Width = 40.57;
+                    worksheet.Column(3).Width = 40.57;
+                    worksheet.Column(4).Width = 20.57;
                     row++;
 
                     foreach (string userAgent in userAgents)
@@ -81,8 +87,13 @@ namespace DeviceDetection
                             worksheet.Cells[row, col].Value = key;
                             worksheet.Cells[row, col + 1].Value = properties1[key];
                             worksheet.Cells[row, col + 2].Value = properties2.ContainsKey(key) ? properties2[key] : "N/A";
-                            string comparison = (properties1[key] == properties2[key]) ? "Same" : "NotSame";
-                            worksheet.Cells[row, col + 3].Value = comparison;
+                            if(key != "Evidence")
+                            {
+                               string comparison = (properties1[key] == properties2[key]) ? "Same" : "NotSame";
+                               worksheet.Cells[row, col + 3].Value = comparison;
+                            }
+                           
+                            
                             row++;
                         }
 
@@ -267,7 +278,8 @@ namespace DeviceDetection
         { "BrowserVersion", output.BrowserVersion.GetHumanReadable() },
         { "IsCrawler", output.IsCrawler.GetHumanReadable() },
         { "CrawlerName", output.CrawlerName.GetHumanReadable() },
-        { "UserAgents", output.UserAgents.GetHumanReadable() },
+        { "ProfileIDs", output.DeviceId.GetHumanReadable() },
+        { "Evidence", output.UserAgents.GetHumanReadable() },
         // Uncomment these if needed
         // { "HardwareFamily", output.HardwareFamily.GetHumanReadable() },
         // { "OEM", output.OEM.GetHumanReadable() }
