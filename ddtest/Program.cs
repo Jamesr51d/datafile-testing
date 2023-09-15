@@ -13,19 +13,21 @@ using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.Extensions.Logging;
 
+
 namespace DeviceDetection
 {
     class Program
     {
         public static void Main()
         {
-            // DATAFILES
-            string Datafile1 = @"\\dpnas1\Production\daphne\hash\v4\2023\09\14\Enterprise-HashV41.hash";
-            string Datafile2 = @"\\xnas1\Test\james\pearl.daphne\pre-prod\daphne\hash\v4\2023\09\14\Enterprise-HashV41.hash";
-            // string Datafile2 = @"\\XNAS1\Test\james\pearl.daphne\20230904b\daphne\hash\v4\2023\09\03\Enterprise-HashV41.hash";
-            // string Datafile = @"\\dpnas1\Production\daphne\hash\v4\2023\09\04\Enterprise-HashV41.hash";
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            string filenameNew = "Top1500Crawlers";
+            // DATAFILES
+            string Datafile1 = @"\\";
+            string Datafile2 = @"\\";
+          
+
+            string filenameNew = "Top1500Crawlers2";
 
             // Filepath for Useragent Text file 
             string filePath = $"C:\\Users\\jamesr\\Documents\\DatafileTesting\\{filenameNew}.txt";
@@ -40,6 +42,10 @@ namespace DeviceDetection
             Console.WriteLine("Which test to run:\n1. Output detection in text file for Useragents\n2. Performance Tests\n 3.Input/Output Useragent on Console:\nInput (1|2|3)");
             string whichTest = Console.ReadLine();
 
+            string outputDetection = "1";
+            string performanceTest = "2";
+            string outputUserAgentToConsole = "3";
+
             // Build Pipelines for different settings
             Dictionary<(PerformanceProfiles, string), IPipeline> pipelines = new Dictionary<(PerformanceProfiles, string), IPipeline>
                 {
@@ -53,7 +59,7 @@ namespace DeviceDetection
                     { (PerformanceProfiles.MaxPerformance, Datafile2), CreatePipeline(PerformanceProfiles.MaxPerformance, Datafile2) },
             };
 
-            if (whichTest == "1")
+            if (whichTest == outputDetection)
             {
                 using (ExcelPackage package = new ExcelPackage())
                 {
@@ -77,10 +83,12 @@ namespace DeviceDetection
                     foreach (string userAgent in userAgents)
                     {
                         // Process for Datafile1
-                        Dictionary<string, string> properties1 = ProcessUserAgent(pipelines[(PerformanceProfiles.Balanced, Datafile1)], userAgent);
+                        var a = pipelines[(PerformanceProfiles.Balanced, Datafile1)];
+                        Dictionary<string, string> properties1 = ProcessUserAgent(a, userAgent);
 
                         // Process for Datafile2
-                        Dictionary<string, string> properties2 = ProcessUserAgent(pipelines[(PerformanceProfiles.Balanced, Datafile2)], userAgent);
+                        var b = pipelines[(PerformanceProfiles.Balanced, Datafile2)];
+                        Dictionary<string, string> properties2 = ProcessUserAgent(b, userAgent);
 
                         foreach (var key in properties1.Keys)
                         {
@@ -89,7 +97,12 @@ namespace DeviceDetection
                             worksheet.Cells[row, col + 2].Value = properties2.ContainsKey(key) ? properties2[key] : "N/A";
                             if(key != "Evidence")
                             {
-                               string comparison = (properties1[key] == properties2[key]) ? "Same" : "NotSame";
+                               var same = (properties1[key] == properties2[key]);
+                               if (same == false)
+                                {
+                                    int t = 0;
+                                }
+                                string comparison = same ? "Same" : "NotSame";
                                worksheet.Cells[row, col + 3].Value = comparison;
                             }
                            
@@ -109,7 +122,7 @@ namespace DeviceDetection
             }
 
 
-            else if (whichTest == "2")
+            else if (whichTest == performanceTest)
             {
                 using (ExcelPackage package = new ExcelPackage())
                 {
@@ -191,7 +204,7 @@ namespace DeviceDetection
                 }
             }
 
-            else if (whichTest == "3")
+            else if (whichTest == outputUserAgentToConsole)
             {
                 Console.WriteLine("Input UserAgent(s)");
                 string input = Console.ReadLine();
@@ -209,6 +222,13 @@ namespace DeviceDetection
                     }
 
                 }
+            }
+
+            else if (whichTest == "4")
+            {
+                // feed in list of profileIDS dfrom database 
+                // feed in Useragents 
+                // compare the two outputs on an excel sheet
             }
 
             else
