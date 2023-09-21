@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ddtest
 {
-    public  class UnitTest
+    public class UnitTest
     {
 
         public UnitTest()

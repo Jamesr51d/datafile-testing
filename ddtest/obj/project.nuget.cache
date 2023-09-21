@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ACfMfLQ5FwnRrx1h97dezMgbF7aLl0syYdOZZfZD+a4rgy9oVMzC1DmbTeUDDrOsLQRDlTvzTACKBwc4OlcWyA==",
+  "dgSpecHash": "lV/5D+CbMQ+1xiB8LLTiuHqwlMCm5g2k8bPmZhV50caqIP336GoxQH480+o4ThYij+1hc5Dz8mmLA5xDA4A9LQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jamesr\\source\\repos\\ddlocal\\ddtest\\ddtest.csproj",
+  "projectFilePath": "C:\\Users\\jamesr\\source\\repos\\ddlocal\\ddtest\\LocalDetection.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jamesr\\.nuget\\packages\\epplus\\6.2.8\\epplus.6.2.8.nupkg.sha512",
     "C:\\Users\\jamesr\\.nuget\\packages\\epplus.interfaces\\6.1.1\\epplus.interfaces.6.1.1.nupkg.sha512",
