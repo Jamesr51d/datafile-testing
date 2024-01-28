@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="config.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EPPlus" Version="6.2.8" />
     <PackageReference Include="FiftyOne.DeviceDetection" Version="4.4.23" />
   </ItemGroup>

@@ -7,36 +7,29 @@ using FiftyOne.Pipeline.Engines;
 using Microsoft.Extensions.Logging;
 using LocalDetection;
 using static LocalDetection.Program;
+using FiftyOne.Pipeline.Engines.Data;
 
 namespace LocalDetection
 { 
     public class BuildPipeline
     {
-        public static IPipeline CreatePipeline(PerformanceProfiles performanceProfile, string dataFile)
+        public static IPipeline CreatePipeline(
+            PerformanceProfiles performanceProfile,
+            string dataFile,
+            bool setPerf = false,
+            bool setPred = true)
         {
             var loggerFactory = new LoggerFactory();
             var engine = new DeviceDetectionHashEngineBuilder(loggerFactory)
-                // .SetDrift(100) // Should look for sub strings over a wider range.
+                 .SetDrift(0) // Should look for sub strings over a wider range.
                 .SetPerformanceProfile(performanceProfile)
-                .SetUsePredictiveGraph(true)
-                .SetUsePerformanceGraph(false)
+                .SetUsePredictiveGraph(setPerf)
+                .SetUsePerformanceGraph(setPred)
                 .SetAutoUpdate(false)
                 .SetDataFileSystemWatcher(false)
+                // .SetProperties()
                 .Build(dataFile, false);
             return new PipelineBuilder(loggerFactory).AddFlowElement(engine).Build();
-/*          TODO: Replace HashEngine with this when Drift has been moved across. 
- *          
-            return new DeviceDetectionPipelineBuilder()
-              .UseOnPremise(dataFile, false)
-               .SetPerformanceProfile(performanceProfile)
-              .SetUsePredictiveGraph(true)
-              .SetUsePerformanceGraph(false)
-               .SetShareUsage(false)
-              .SetAutoUpdate(false)
-               .SetDataUpdateOnStartUp(false)
-               .SetDataFileSystemWatcher(false)
-               .Build();
-*/
         }
 
         public static IFlowData CreateFlowData(IPipeline pipeline, string userAgent)
@@ -50,23 +43,23 @@ namespace LocalDetection
         {
             return new Dictionary<string, string>
             {
-                { "UserAgent", userAgent },
-                { "HardwareVendor", output.HardwareVendor.GetHumanReadable() },
-                { "HardwareName", output.HardwareName.GetHumanReadable() },
-                { "HardwareModel", output.HardwareModel.GetHumanReadable() },
-                { "PlatformVendor", output.PlatformVendor.GetHumanReadable() },
-                { "PlatformName", output.PlatformName.GetHumanReadable() },
-                { "PlatformVersion", output.PlatformVersion.GetHumanReadable() },
-                { "BrowserVendor", output.BrowserVendor.GetHumanReadable() },
+              { "UserAgent", userAgent },
+             { "HardwareVendor", output.HardwareVendor.GetHumanReadable() },
+              { "HardwareName", output.HardwareName.GetHumanReadable() },
+              { "HardwareModel", output.HardwareModel.GetHumanReadable() },
+              { "PlatformVendor", output.PlatformVendor.GetHumanReadable() },
+              { "PlatformName", output.PlatformName.GetHumanReadable() },
+              { "PlatformVersion", output.PlatformVersion.GetHumanReadable() },
+              { "BrowserVendor", output.BrowserVendor.GetHumanReadable() },
                 { "BrowserName", output.BrowserName.GetHumanReadable() },
-                { "BrowserVersion", output.BrowserVersion.GetHumanReadable() },
-                { "IsCrawler", output.IsCrawler.GetHumanReadable() },
-                { "CrawlerName", output.CrawlerName.GetHumanReadable() },
-                { "ProfileIDs", output.DeviceId.GetHumanReadable() },
-                { "Evidence", output.UserAgents.GetHumanReadable() },
-                // Uncomment these if needed
-                // { "HardwareFamily", output.HardwareFamily.GetHumanReadable() },
-                // { "OEM", output.OEM.GetHumanReadable() }
+              { "BrowserVersion", output.BrowserVersion.GetHumanReadable() },
+              { "IsCrawler", output.IsCrawler.GetHumanReadable() },
+              { "CrawlerName", output.CrawlerName.GetHumanReadable() },
+              { "ProfileIDs", output.DeviceId.GetHumanReadable() },
+              { "Evidence", output.UserAgents.GetHumanReadable() },
+               
+           /*    { "HardwareFamily", output.HardwareFamily.GetHumanReadable() },
+               { "OEM", output.OEM.GetHumanReadable() }*/
             };
         }
     }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jamesr\\source\\repos\\ddlocal\\ddtest\\LocalDetection.csproj": {}
+    "D:\\LocalDetectionTests\\ddtest\\LocalDetection.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jamesr\\source\\repos\\ddlocal\\ddtest\\LocalDetection.csproj": {
+    "D:\\LocalDetectionTests\\ddtest\\LocalDetection.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jamesr\\source\\repos\\ddlocal\\ddtest\\LocalDetection.csproj",
+        "projectUniqueName": "D:\\LocalDetectionTests\\ddtest\\LocalDetection.csproj",
         "projectName": "LocalDetection",
-        "projectPath": "C:\\Users\\jamesr\\source\\repos\\ddlocal\\ddtest\\LocalDetection.csproj",
+        "projectPath": "D:\\LocalDetectionTests\\ddtest\\LocalDetection.csproj",
         "packagesPath": "C:\\Users\\jamesr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jamesr\\source\\repos\\ddlocal\\ddtest\\obj\\",
+        "outputPath": "D:\\LocalDetectionTests\\ddtest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jamesr\\AppData\\Roaming\\NuGet\\NuGet.Config",

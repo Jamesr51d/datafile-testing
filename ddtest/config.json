@@ -1,0 +1,6 @@
+{
+    "Hash1FilePath": "\\\\dpnas1\\Production\\daphne\\hash\\v4\\2023\\11\\07\\TAC-HashV41.hash",
+    "Hash2FilePath": "\\\\dpnas1\\Production\\daphne\\hash\\v4\\2023\\11\\15\\TAC-HashV41.hash",
+    "InputFilePath": "\\\\xnas1\\Test\\DataTeamTesting\\LocalDetectionTests\\InputUAs\\topmilliDivider.txt",
+    "OutPutFolder": "\\\\xnas1\\Test\\DataTeamTesting\\LocalDetectionTests\\OutputFiles\\"
+}
